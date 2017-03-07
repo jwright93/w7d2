@@ -1,4 +1,4 @@
-import { getTodos } from '../utils/todo_api_util';
+import APIUtil from '../utils/todo_api_util';
 
 export const RECEIVE_TODOS = "RECEIVE_TODOS";
 export const RECEIVE_TODO = "RECEIVE_TODO";
@@ -26,5 +26,9 @@ export const todoError = error => ({
 });
 
 export const fetchTodos = () => dispatch => (
-  getTodos().then(todos => dispatch(receiveTodos(todos)))
+  APIUtil.getTodos().then(todos => dispatch(receiveTodos(todos)))
+);
+
+export const createTodo = (todo) => dispatch => (
+  APIUtil.createTodo(todo).then(newTodo => dispatch(receiveTodo(newTodo)))
 );
