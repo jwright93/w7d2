@@ -1,13 +1,17 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import RootReducer from '../reducers/root_reducer';
-import { getTodos} from '../utils/todo_api_util';
+import createLogger from 'redux-logger';
+import thunk from '../middleware/thunk';
+
+const logger = createLogger();
 
 const configureStore = (preloadedState = {}) => {
-  const store = createStore(RootReducer, preloadedState);
-  store.subscribe(() => {
-    localStorage.state = JSON.stringify(store.getState());
-  });
-  window.getTodos = getTodos;
+  const store = createStore(
+    RootReducer,
+     preloadedState,
+     applyMiddleware(thunk)
+  );
+
   return store;
 };
 

@@ -4,6 +4,7 @@ import configureStore from './store/store';
 
 import Root from './components/root';
 
+import {fetchTodos} from './actions/todo_actions';
 document.addEventListener('DOMContentLoaded', () => {
   const preloadedState = localStorage.state ?
     JSON.parse(localStorage.state) : {};
@@ -11,4 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const root = document.getElementById('content');
   ReactDOM.render(<Root store={store} />, root);
+
+  window.store = store;
+  window.fetchTodos = fetchTodos;
 });
